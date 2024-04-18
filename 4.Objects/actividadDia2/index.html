@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objects day 2</title>
+    <script src="js/main.js"></script>
+</head>
+<body>
+    <a href="https://stackoverflow.com/questions/23436437/why-can-i-change-a-constant-object-in-javascript">Objects day 2</a>
+    <p>Usar el link de aariba para entender mas sobre porque se pueden cambiar propiedades de los objetos aun cuando son declarados usando CONST y como se debe cambiar para que sea valido</p>
+    <br>
+    <table>
+        <tr>
+            <th><p>Que</p></th>
+            <th><p>Correcto</p></th>
+            <th><p>incorrecto</p></th>
+        </tr>
+        <tr>
+            <td><p>Declarar objetos usando CONST</p></td>
+            <td><p>Puedes declarar un objeto con const y luego modificar sus propiedades sin problemas</p></td>
+            <td><p>Sin embargo, no puedes reasignar el objeto completo</p></td>
+        </tr>
+        <tr>
+            <td><p></p></td>
+            <td><p>const miObjeto = {};<br>miObjeto.propiedad = "valor"; // Esto es válido</p></td>
+            <td><p>const otroObjeto = {};<br>otroObjeto = { nuevoValor: 42 }; // Esto dará un error</p></td>
+        </tr>
+        <tr>
+            <td><p>Declarar arreglos usando CONST</p></td>
+            <td><p>Similar al caso de objetos, puedes agregar o modificar elementos en un arreglo declarado con const</p></td>
+            <td><p>Pero no puedes asignar un nuevo arreglo a la misma variable</p></td>
+        </tr>
+        <tr>
+            <td><p></p></td>
+            <td><p>const miArreglo = [];<br>miArreglo.push("elemento"); // Esto es válido</p></td>
+            <td><p>const otroArreglo = [];<br>otroArreglo = [1, 2, 3]; // Esto también dará un error</p></td>
+        </tr>
+    </table>
+    <section>
+        <a href="https://hallowed-slug-719.notion.site/EJ-1-JS-QUEENS-6c3b188e890d4c4393e96d78a7d0c0b6">Ejercicio a realizar en el main.js relacionado en el head>script de este documento</a>
+    </section>
+</body>
+</html>
