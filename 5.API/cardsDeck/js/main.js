@@ -50,10 +50,8 @@ let styleElement = document.createElement('style');
 styleElement.textContent = styles;
 document.head.appendChild(styleElement);
 
-// Obtener una nueva baraja al cargar la página
-window.onload = function() {
-    getNewDeck();
-}
+// Asignación del evento click al botón de inicio fuera de la función onload
+document.getElementById('startButton').addEventListener('click', startGame);
 
 // Función para obtener una nueva baraja
 function getNewDeck() {
@@ -61,7 +59,7 @@ function getNewDeck() {
     .then(response => response.json())
     .then(data => {
         deckId = data.deck_id;
-        drawCard(2);
+        drawCard(1);
     })
     .catch(error => console.log(error));
 }
@@ -99,17 +97,28 @@ function updatePlayerTotal(card) {
 
 // Función para mostrar las cartas del jugador y el total en la interfaz de usuario
 function updateUI() {
-    const gameContainer = document.querySelector('.gameContainer');
     const imageCard = document.querySelector('.imageCard');
     const countTotal = document.querySelector('.countTotal');
-    
+    const obtainedCardsContainer = document.querySelector('.obtainedCardsContainer');
+
     // Mostrar la última carta del jugador
-    const lastCard = playerCards[playerCards.length - 1];
-    imageCard.src = lastCard.image;
-    imageCard.alt = `${lastCard.value} of ${lastCard.suit}`;
+    if (playerCards.length > 0) {
+        const lastCard = playerCards[playerCards.length - 1];
+        imageCard.src = lastCard.image;
+        imageCard.alt = `${lastCard.value} of ${lastCard.suit}`;
+    }
 
     // Mostrar el total del jugador
     countTotal.textContent = `Total: ${playerTotal}`;
+
+    // Mostrar todas las cartas obtenidas anteriormente
+    obtainedCardsContainer.innerHTML = '';
+    playerCards.forEach(card => {
+        const cardImg = document.createElement('img');
+        cardImg.src = card.image;
+        cardImg.alt = `${card.value} of ${card.suit}`;
+        obtainedCardsContainer.appendChild(cardImg);
+    });
 
     // Actualizar botones según las reglas del juego
     const botones = document.querySelector('.botones');
@@ -125,10 +134,22 @@ function updateUI() {
     }
 }
 
+
 // Función para reiniciar el juego
 function resetGame() {
     deckId = null;
     playerCards = [];
     playerTotal = 0;
     getNewDeck();
+}
+
+
+
+function startGame() {
+    if (document.getElementById('startButton').disabled) {
+        return; // No inicia el juego si el botón está desactivado
+    }
+    resetGame();
+    document.querySelector('.ObtainedCards').style.display = 'block'; // Muestra la sección de cartas obtenidas
+    drawCard(1); // Dibuja la primera carta
 }
